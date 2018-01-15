@@ -80,6 +80,7 @@
               delete item.titleId
             })
             this.row = res.list
+            console.log(this.row)
           }
         })
       },
@@ -99,6 +100,8 @@
         this.name = this.getData(this.row, 'name')
         this.sex = this.getData(this.row, 'sex')
         this.tel = this.getData(this.row, 'tel')
+        this.consultingRoomId = this.getData(this.row, 'consultingRoomId')
+        this.departmentId = this.getData(this.row, 'departmentId')
         this.modifyShow = true
         this.setIsQueryDoc(false)
         this.setDoctorId('')
@@ -124,7 +127,9 @@
           age: parseInt(this.age),
           name: this.name,
           sex: this.sex,
-          tel: this.tel
+          tel: this.tel,
+          consultingRoomId: this.consultingRoomId,
+          departmentId: this.departmentId
         }
         updateUser(data).then((res) => {
           res = res.data
@@ -133,6 +138,7 @@
             this.queryDocs()
           }
         })
+        console.log(data)
       },
       reset() {
         this.updateId = ''

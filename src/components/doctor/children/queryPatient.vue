@@ -187,6 +187,11 @@
     .table-wrapper
       display inline-block
 
+  .a-info
+    display inline-block
+    width 20%
+    text-align right
+
   .a-btn
     padding-top 1.6rem
 
