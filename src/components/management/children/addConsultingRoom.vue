@@ -44,6 +44,7 @@
     methods: {
       closeFormModule() {
         this.addShow = false
+        this.$router.push('/management/queryConsultingRoom')
       },
       comAdd() {
         let data = {

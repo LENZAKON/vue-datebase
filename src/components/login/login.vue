@@ -38,8 +38,11 @@
           res = res.data
           if (res.success) {
             if (res.list[0].title === '医生') {
-              this.setDiagnosisingDoc(res.id)
+              this.setDiagnosisingDoc(res.list[0].id)
               this.$router.push('/doctor')
+            }
+            if (res.list[0].title === '护士') {
+              this.$router.push('/nurse')
             }
           } else {
             alert('登录出错')

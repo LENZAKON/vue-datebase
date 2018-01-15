@@ -97,3 +97,82 @@ export function addDepConsultingRoom(data) {
     return Promise.resolve(res)
   })
 }
+
+export function addAcount(data) {
+  const url = '/admin/user/add'
+
+  return axios.post(url, qs.stringify(data)).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+export function queryAllMedicines() {
+  const url = '/admin/medicines'
+
+  return axios.get(url).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+export function updateMedicine(data) {
+  const url = '/admin/medicine/update'
+
+  return axios.post(url, qs.stringify(data)).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+export function deleteMedicine(data) {
+  const url = '/admin/medicine/delete'
+
+  return axios.post(url, qs.stringify(data)).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+export function addMedicine(data) {
+  const url = '/admin/medicine/add'
+
+  return axios.post(url, qs.stringify(data)).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+export function queryAllDocs() {
+  const url = '/admin/user'
+
+  return axios.get(url, {
+    params: {
+      titleId: '1'
+    }
+  }).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+export function queryAllNurs() {
+  const url = '/admin/user'
+
+  return axios.get(url, {
+    params: {
+      titleId: '2'
+    }
+  }).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+export function updateUser(data) {
+  const url = '/admin/user/update'
+
+  return axios.post(url, qs.stringify(data)).then((res) => {
+    return Promise.resolve(res)
+  })
+}
+
+export function deleteUser(data) {
+  const url = '/admin/user/delete'
+  return axios.post(url, qs.stringify(data)).then((res) => {
+    return Promise.resolve(res)
+  })
+}

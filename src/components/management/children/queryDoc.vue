@@ -1,27 +1,27 @@
 <template>
   <div class="queryDoc">
     <div class="table-wrapper">
-      <k-table @modifyMes="modifyMes" @deleteMes="deleteMes"></k-table>
+      <k-table :cloumn="cloumn" :row="row" @modifyMes="modifyMes" @deleteMes="deleteMes"></k-table>
     </div>
     <div class="from-wrapper">
       <form-module :addAddShow="modifyShow" @closeFormModule="closeFormModule" @queryDoc="queryDoc">
-        <p class="a-title" slot="form-title">修改医生账号</p>
+        <p class="a-title" slot="form-title">修改医生信息</p>
         <div class="a-items" slot="form-items">
           <div class="a-item">
-            <span class="a-info">账号：</span>
-            <input id="a-name" type="text" readonly/>
+            <span class="a-info">姓名：</span>
+            <input id="a-name" type="text" v-model="name"/>
           </div>
           <div class="a-item">
-            <span class="a-info">旧密码：</span>
-            <input id="a-address" type="text" readonly v-model="oldPassword"/>
+            <span class="a-info">性别：</span>
+            <input id="a-sex" type="text" v-model="sex"/>
           </div>
           <div class="a-item">
-            <span class="a-info">新密码：</span>
-            <input id="an-address" type="password" v-model="newPassword"/>
+            <span class="a-info">年龄：</span>
+            <input id="a-age" type="text" v-model="age"/>
           </div>
           <div class="a-item">
-            <span class="a-info">再次输入：</span>
-            <input id="ang-address" type="password" v-model="newAPassword" ref="again"/>
+            <span class="a-info">电话：</span>
+            <input id="a-tel" type="text" v-model="tel"/>
           </div>
         </div>
         <div class="a-btn" slot="form-btn">
@@ -36,47 +36,110 @@
   import KTable from 'base/table/table'
   import FormModule from 'base/formModule/formModule'
   import {mapMutations} from 'vuex'
+  import {queryAllDocs, updateUser, deleteUser} from 'api/management.js'
 
   export default {
+    created() {
+      this.queryDocs()
+    },
     data() {
       return {
         id: '',
         modifyShow: false,
         ifShow: true,
-        account: '',
-        oldPassword: '',
-        newPassword: '',
-        newAPassword: ''
+        name: '',
+        age: '',
+        sex: '',
+        tel: '',
+        cloumn: [{
+          cloName: '编号',
+          cloValName: 'id'
+        }, {
+          cloName: '姓名',
+          cloValName: 'name'
+        }, {
+          cloName: '性别',
+          cloValName: 'sex'
+        }, {
+          cloName: '年龄',
+          cloValName: 'age'
+        }, {
+          cloName: '电话',
+          cloValName: 'tel'
+        }],
+        row: [],
+        updateId: ''
       }
-    },
-    watch: {
-      newAPassword(value) {
-        if (value !== this.newPassword) {
-          this.$refs.again.style.borderColor = 'red'
-        } else {
-          this.$refs.again.style.borderColor = '#1fcab3'
-        }
-      }
-    },
-    created() {
-    },
-    mounted() {
     },
     methods: {
+      queryDocs() {
+        queryAllDocs().then((res) => {
+          res = res.data
+          if (res.success) {
+            res.list.forEach((item) => {
+              delete item.titleId
+            })
+            this.row = res.list
+          }
+        })
+      },
+      getData(list, attr) {
+        let val
+        list.forEach((item) => {
+          if (item.id === this.updateId) {
+            val = item[attr]
+          }
+        })
+        return val
+      },
       modifyMes(id) {
         console.log(id)
-        this.setIsQueryDoc(true)
-        this.setDoctorId(id)
-        this.setIsQueryNurse(false)
-        this.setNurseId('')
+        this.updateId = id
+        this.age = this.getData(this.row, 'age')
+        this.name = this.getData(this.row, 'name')
+        this.sex = this.getData(this.row, 'sex')
+        this.tel = this.getData(this.row, 'tel')
         this.modifyShow = true
+        this.setIsQueryDoc(false)
+        this.setDoctorId('')
+        this.setIsQueryNurse(true)
+        this.setNurseId(id)
       },
       deleteMes(id) {
         console.log(id)
+        let data = {id}
+        deleteUser(data).then((res) => {
+          res = res.data
+          if (res.success) {
+            this.queryDocs()
+          }
+        })
       },
       delDoc() {
       },
       comModify() {
+        let data = {
+          id: this.updateId,
+          titleId: '1',
+          age: parseInt(this.age),
+          name: this.name,
+          sex: this.sex,
+          tel: this.tel
+        }
+        updateUser(data).then((res) => {
+          res = res.data
+          if (res.success) {
+            this.modifyShow = false
+            this.queryDocs()
+          }
+        })
+      },
+      reset() {
+        this.updateId = ''
+        this.age = ''
+        this.name = ''
+        this.sex = ''
+        this.tel = ''
       },
       closeFormModule() {
         this.modifyShow = false
@@ -105,13 +168,17 @@
     .table-wrapper
       display inline-block
 
-  #an-address, #ang-address
+  #a-name, #a-age, #a-tel, #a-sex
     border 1px solid $color-theme-d
     outline none
+
+  .a-btn
+    padding-top 1.6rem
 
   .btn--m
     padding 0.4rem 1.4rem
     border-radius 4px
+
   .btn--green
     background $color-theme
     &:hover

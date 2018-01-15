@@ -1,0 +1,57 @@
+<template>
+  <div class="nurse">
+    <div class="sidebar-containe">
+      <sidebar :operations="operations" @selectType="selectType"></sidebar>
+    </div>
+    <div class="router-containe">
+      <router-view ref="routerView"></router-view>
+    </div>
+  </div>
+</template>
+<script type="text/ecmascript-6">
+  import Sidebar from 'base/sidebar/sidebar'
+
+  export default {
+    data() {
+      return {
+        operations: [
+          {
+            type: 'appointment',
+            content: '挂号'
+          },
+          {
+            type: 'charge',
+            content: '收费'
+          }
+        ]
+      }
+    },
+    components: {
+      Sidebar
+    },
+    methods: {
+      selectType(type) {
+        console.log(type)
+        if (type === 'appointment') {
+          this.$router.push('/nurse/appointment')
+          this.$refs.routerView.showFormModule && this.$refs.routerView.showFormModule()
+          this.$refs.routerView.queryDeps && this.$refs.routerView.queryDeps()
+        }
+        if (type === 'charge') {
+          this.$router.push('/nurse/charge')
+          this.$refs.routerView.showFormModule && this.$refs.routerView.showFormModule()
+        }
+      }
+    }
+  }
+</script>
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  .sidebar-containe
+    display inline-block
+    float left
+    vertical-align top
+  .router-containe
+    display flex
+    justify-content center
+    vertical-align top
+</style>

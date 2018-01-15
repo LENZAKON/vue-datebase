@@ -13,6 +13,7 @@
         <th v-show="type==1" class="op" :data-id="row[index][id]" @click="modifyMes">修改</th>
         <th v-show="type==1" class="op" :data-id="row[index][id]" @click="deleteMes">删除</th>
         <th v-show="type==2" class="op" :data-id="row[index][id]" @click="diagnosis">诊断</th>
+        <th v-show="type==3" class="op" :data-id="row[index][id]" @click="charge">收费</th>
       </tr>
       </tbody>
     </table>
@@ -76,6 +77,9 @@
       },
       diagnosis(e) {
         this.$emit('diagnosis', getData(e.target, 'id'))
+      },
+      charge(e) {
+        this.$emit('charge', getData(e.target, 'id'))
       }
     }
   }

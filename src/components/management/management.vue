@@ -37,6 +37,10 @@
             content: '添加护士账号'
           },
           {
+            type: 'addMedicine',
+            content: '添加药品'
+          },
+          {
             type: 'queryJobTitle',
             content: '查看职称'
           },
@@ -55,6 +59,10 @@
           {
             type: 'queryNur',
             content: '查看护士账号'
+          },
+          {
+            type: 'queryMedicine',
+            content: '查看药品'
           }
         ]
       }
@@ -77,8 +85,8 @@
         if (type === 'queryDoc') {
           this.$router.push('/management/queryDoc')
         }
-        if (type === 'queryDoc') {
-          this.$router.push('/management/queryDoc')
+        if (type === 'queryMedicine') {
+          this.$router.push('/management/queryMedicine')
         }
         if (type === 'queryConsultingRoom') {
           this.$router.push('/management/queryConsultingRoom')
@@ -89,6 +97,10 @@
         }
         if (type === 'addNur') {
           this.$router.push('/management/addNur')
+          this.$refs.routerView.showFormModule && this.$refs.routerView.showFormModule()
+        }
+        if (type === 'addMedicine') {
+          this.$router.push('/management/addMedicine')
           this.$refs.routerView.showFormModule && this.$refs.routerView.showFormModule()
         }
         if (type === 'addJobTitle') {

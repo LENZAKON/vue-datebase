@@ -57,6 +57,7 @@
         })
       },
       closeFormModule() {
+        this.newDep = ''
         this.modifyShow = false
       },
       comModify() {

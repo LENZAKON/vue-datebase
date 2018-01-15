@@ -101,7 +101,7 @@
   }
 
   .a-module {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -118,7 +118,7 @@
     /*height: 300px;*/
     width: 500px;
     left: 50%;
-    top: 20%;
+    top: 0;
     margin-left: -250px;
     margin-bottom: -150px;
     z-index: 2000;

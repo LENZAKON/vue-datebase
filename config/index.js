@@ -16,6 +16,15 @@ module.exports = {
       },
       '/admin/**': {
         target: 'http://192.168.0.110:8080'
+      },
+      '/appointment/**': {
+        target: 'http://192.168.0.110:8080'
+      },
+      '/appointment': {
+        target: 'http://192.168.0.110:8080'
+      },
+      '/casereport/**': {
+        target: 'http://192.168.0.110:8080'
       }
     },
 

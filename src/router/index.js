@@ -12,9 +12,15 @@ import QueryDep from 'components/management/children/queryDep'
 import AddDep from 'components/management/children/addDep'
 import QueryConsultingRoom from 'components/management/children/queryConsultingRoom'
 import AddConsultingRoom from 'components/management/children/addConsultingRoom'
+import QueryMedicine from 'components/management/children/queryMedicine'
+import AddMedicine from 'components/management/children/addMedicine'
 
 import Doctor from 'components/doctor/doctor'
 import QueryPatient from 'components/doctor/children/queryPatient'
+
+import Nurse from 'components/nurse/nurse'
+import Appointment from 'components/nurse/children/appointment'
+import Charge from 'components/nurse/children/charge'
 
 Vue.use(Router)
 
@@ -54,6 +60,14 @@ export default new Router({
           component: AddDoc
         },
         {
+          path: 'addMedicine',
+          component: AddMedicine
+        },
+        {
+          path: 'queryMedicine',
+          component: QueryMedicine
+        },
+        {
           path: 'addJobTitle',
           component: AddJobTitle
         },
@@ -83,6 +97,21 @@ export default new Router({
         {
           path: 'queryPatient',
           component: QueryPatient
+        }
+      ]
+    },
+    {
+      path: '/nurse',
+      component: Nurse,
+      redirect: '/nurse/charge',
+      children: [
+        {
+          path: 'charge',
+          component: Charge
+        },
+        {
+          path: 'appointment',
+          component: Appointment
         }
       ]
     }
