@@ -128,10 +128,14 @@
       queryDeps() {
         queryDesps().then((res) => {
           res = res.data
-          res.list.forEach((item) => {
-            delete item.counts
-          })
-          this.departments = res.list
+          if (res.success) {
+            res.list.forEach((item) => {
+              delete item.counts
+            })
+            this.departments = res.list
+          } else {
+            this.$router.push('/loginsy')
+          }
         })
       },
       queryOneDepConsultingRoom(data) {

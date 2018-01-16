@@ -68,6 +68,8 @@
             this.appPatId.push(tempId)
           })
           this.row = result
+        } else {
+          this.$router.push('/loginsy')
         }
       })
     },

@@ -80,6 +80,8 @@
               delete item.titleId
             })
             this.row = res.list
+          } else {
+            this.$router.push('/loginsy')
           }
         })
       },

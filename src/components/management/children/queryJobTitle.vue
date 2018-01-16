@@ -47,7 +47,12 @@
     methods: {
       queryJobTtiles() {
         queryJobTitles().then((res) => {
-          this.row = res.data.titles
+          res = res.data
+          if (res.success) {
+            this.row = res.titles
+          } else {
+            this.$router.push('/loginsy')
+          }
         })
       },
       closeFormModule() {

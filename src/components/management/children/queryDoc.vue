@@ -81,6 +81,8 @@
             })
             this.row = res.list
             console.log(this.row)
+          } else {
+            this.$router.push('/loginsy')
           }
         })
       },

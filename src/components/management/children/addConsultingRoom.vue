@@ -57,6 +57,9 @@
             console.log(res)
             this.addShow = false
             this.$router.push('/management/queryConsultingRoom')
+          } else {
+            alert('添加出错')
+            this.$router.push('/loginsy')
           }
         })
       },
@@ -78,10 +81,14 @@
       queryDeps() {
         queryDesps().then((res) => {
           res = res.data
-          res.list.forEach((item) => {
-            delete item.counts
-          })
-          this.list = res.list
+          if (res.success) {
+            res.list.forEach((item) => {
+              delete item.counts
+            })
+            this.list = res.list
+          } else {
+            this.$router.push('/loginsy')
+          }
         })
       }
     },

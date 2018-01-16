@@ -49,11 +49,15 @@
       queryDeps() {
         queryDesps().then((res) => {
           res = res.data
-          res.list.forEach((item) => {
-            this.counts[item.id] = item.counts
-            delete item.counts
-          })
-          this.row = res.list
+          if (res.success) {
+            res.list.forEach((item) => {
+              this.counts[item.id] = item.counts
+              delete item.counts
+            })
+            this.row = res.list
+          } else {
+            this.$router.push('/loginsy')
+          }
         })
       },
       closeFormModule() {

@@ -44,6 +44,9 @@
           if (res.success) {
             this.addShow = false
             this.$router.push('/management/queryDep')
+          } else {
+            alert('添加出错')
+            this.$router.push('/loginsy')
           }
         })
       }
@@ -66,6 +69,7 @@
   .btn--m
     padding 0.4rem 1.4rem
     border-radius 4px
+
   .btn--green
     background $color-theme
     &:hover

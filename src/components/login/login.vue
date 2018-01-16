@@ -44,6 +44,9 @@
             if (res.list[0].title === '护士') {
               this.$router.push('/nurse')
             }
+            if (res.list[0].title === '管理员') {
+              this.$router.push('/management')
+            }
           } else {
             alert('登录出错')
           }

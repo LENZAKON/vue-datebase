@@ -73,6 +73,8 @@
           if (res.success) {
             console.log(res)
             this.row = res.list
+          } else {
+            this.$router.push('/loginsy')
           }
         })
       },
