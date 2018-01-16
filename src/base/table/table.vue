@@ -96,6 +96,8 @@
         border-top-width 1px
         border-top-style solid
         border-top-color $color-table-bg
+      thead tr th
+        font-size 1.4rem
       td,th
         padding 0.8rem 1.6rem
         font-size 1.2rem
